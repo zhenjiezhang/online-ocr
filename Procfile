@@ -1,1 +1,1 @@
-web: python index01.py
+web: gunicorn hello:app --log-file=-
