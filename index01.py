@@ -6,7 +6,7 @@ app = Flask(__name__)
 
     # return process_image('http://www.nhc.noaa.gov/gifs/WindSpeedProbText2_sm.gif')
 
-@app.route("/")
+@app.route('/')
 def hello():
     return "Hello from Python!"
 
