@@ -1,0 +1,80 @@
+<html>
+ <head>
+<link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+
+<script type="text/javascript" language="javascript">
+function displayImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#selectedImage')
+                    .attr('src', e.target.result)
+                    .width(800)
+                ;
+            };
+            resp=''
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+</head>
+
+
+
+
+        <h1>What is the web location of the picture you want to OCR: </h1>
+        <form action="" method="post" name='web'>
+            <p>
+                Please enter your picture web address:<br>
+                <input type="text" name="webAddr" size=80>
+
+            </p>
+            
+            <input type='radio' name='lang' value='eng' {% if lang=='eng' %} checked='checked' {%endif%}>English
+            <input type='radio' name='lang' value='chi_sim' {% if lang=='chi_sim' %} checked='checked' {%endif%}>Chinese (simple)
+
+            <input type='radio' name='lang' value='chi_tra' {% if lang=='chi_tra' %} checked='checked' {%endif%}>Chinese (traditional)
+            <input type='radio' name='lang' value='jpn' {% if lang=='jpn' %} checked='checked' {%endif%}>Japanese
+
+            <p><input type="submit" value='Extract'></p>
+
+
+        </form>
+
+        <form action="" method="post" name='file' enctype="multipart/form-data">
+            <p>
+                Or submit your picture file:<br>
+            </p>
+            <p><input type="file" name="file" onchange='displayImage(this);'></p>
+            <input type='radio' name='lang' value='eng' {% if lang=='eng' %} checked='checked' {%endif%}>English
+            <input type='radio' name='lang' value='chi_sim' {% if lang=='chi_sim' %} checked='checked' {%endif%}>Chinese (simple)
+
+            <input type='radio' name='lang' value='chi_tra' {% if lang=='chi_tra' %} checked='checked' {%endif%}>Chinese (traditional)
+            <input type='radio' name='lang' value='jpn' {% if lang=='jpn' %} checked='checked' {%endif%}>Japanese
+
+            <p><input type="submit" value='Extract'></p>
+            <p><img id='selectedImage' src='#' alt=''></p>
+            
+
+        </form>
+{% block refine %}{% endblock %}
+
+
+<pre>{{resp}}</pre>
+<image src='{{image}}' alt=''>
+
+
+
+
+
+    </body>
+ 
+
+
+   
+
+</html>
