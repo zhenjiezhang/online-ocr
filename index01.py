@@ -27,6 +27,8 @@ def extract():
 
     if request.method=='POST':
         imageString=workImage+'?random='+str(random())
+        lang=request.form.get('lang')
+
 
         if 'PDF' in request.form:
             ocr2PDF('static/output.html')
@@ -40,38 +42,30 @@ def extract():
             text=refine_process()
             image=imageString
             template=postExtractionTemplate
+
+        elif 'submitFile' in request.form:
+
+            
+            f=request.files['file']
+            
+            text=process_file_image(f, lang=lang)
+            image=imageString
+            template=postExtractionTemplate
+
+
+        elif 'suubmitURL' in request.form:
+            url=request.form.get('webAddr')
+            text=process_web_image(url, lang=lang)
+            image=imageString
+            template=postExtractionTemplate
+
+
         else:
-            lang=request.form.get('lang')
+            text= "Wrong form submitted"
 
-            if request.files:
-                f=request.files['file']
-                
-                text=process_file_image(f, lang=lang)
-                image=imageString
-                template=postExtractionTemplate
-
-
-            elif request.form.get('webAddr'):
-                url=request.form.get('webAddr')
-                text=process_web_image(url, lang=lang)
-                image=imageString
-                template=postExtractionTemplate
-
-
-            else:
-                text= "Wrong form submitted"
-
-            if not text:
-                text= "No text in the request"
-            # return render_template('output.html')
-
-            # text=text.splitlines()
-            # text='\n'.join(['<p>'+t+'</p>' for t in text])
-
-            # return jsonify({k: v for k,v in enumerate(text)}), imageString
-
-
-
+        if not text:
+            text= "No text in the request"
+            
 
     return render_template(template, resp=text, image=image, lang=lang, pdf=pdfGenerated)
 

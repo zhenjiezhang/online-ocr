@@ -2,13 +2,11 @@
 
 {% block refine %}
 	<p>Refinement options<p>
-	<form action='' name='refineForm' method='post'>
 
 		<input type='submit' name='refine' value='Refine'>
 		<input type='submit' name='PDF' value='Generate PDF'>
 
 
-	</form>
 	{% if pdf %}
 	<a href='static/test.pdf'>download PDF</a>
 	{% endif %}

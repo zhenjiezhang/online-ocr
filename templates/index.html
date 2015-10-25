@@ -33,36 +33,30 @@ function displayImage(input) {
                 <input type="text" name="webAddr" size=80>
 
             </p>
+            <p><input type="submit" name='submitURL' value='Extract URL'></p>
+
             
-            <input type='radio' name='lang' value='eng' {% if lang=='eng' %} checked='checked' {%endif%}>English
-            <input type='radio' name='lang' value='chi_sim' {% if lang=='chi_sim' %} checked='checked' {%endif%}>Chinese (simple)
-
-            <input type='radio' name='lang' value='chi_tra' {% if lang=='chi_tra' %} checked='checked' {%endif%}>Chinese (traditional)
-            <input type='radio' name='lang' value='jpn' {% if lang=='jpn' %} checked='checked' {%endif%}>Japanese
-
-            <p><input type="submit" value='Extract'></p>
-
-
-        </form>
-
-        <form action="" method="post" name='file' enctype="multipart/form-data">
+           
             <p>
                 Or submit your picture file:<br>
+
             </p>
-            <p><input type="file" name="file" onchange='displayImage(this);'></p>
+            <p>
+            <input type="file" name="file" onchange='displayImage(this);'>
+            <input type="submit" name='submitFile' value='Extract File'>
+            </p>
             <input type='radio' name='lang' value='eng' {% if lang=='eng' %} checked='checked' {%endif%}>English
             <input type='radio' name='lang' value='chi_sim' {% if lang=='chi_sim' %} checked='checked' {%endif%}>Chinese (simple)
 
             <input type='radio' name='lang' value='chi_tra' {% if lang=='chi_tra' %} checked='checked' {%endif%}>Chinese (traditional)
             <input type='radio' name='lang' value='jpn' {% if lang=='jpn' %} checked='checked' {%endif%}>Japanese
 
-            <p><input type="submit" value='Extract'></p>
             <p><img id='selectedImage' src='#' alt=''></p>
+
+{% block refine %}{% endblock %}
             
 
         </form>
-{% block refine %}{% endblock %}
-
 
 <pre>{{resp}}</pre>
 <image src='{{image}}' alt=''>
