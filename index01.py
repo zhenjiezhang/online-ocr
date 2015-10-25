@@ -12,6 +12,7 @@ app.config.from_object('config')
 
 defaultTemplate='index.html'
 postExtractionTemplate='refineExtraction.html'
+inputImage='static/current.png'
 workImage='/static/workImage.png'
 
 
@@ -26,7 +27,7 @@ def extract():
     pdfGenerated=False
 
     if request.method=='POST':
-        imageString=workImage+'?random='+str(random())
+        imageString=inputImage+'?random='+str(random())
         lang=request.form.get('lang')
 
 
